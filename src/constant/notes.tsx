@@ -1,8 +1,3 @@
-const NOTE_ICON_PROPS= {
-  size: 24,
-  color: '#EEE'
-}
-
 export const NOTE_COLORS = {
 	default: "#81ecec",
 	yellow: "#fad390",

@@ -18,16 +18,13 @@ export const SignIn = () => {
 	const [password, setPassword] = useState("");
 	const [isSignedIn, setIsSignedIn] = useState(false);
 
-	const { signInAndCheckFields } = useAuth();
-
-	const goToSignUpPage = () => navigation.navigate("SignUp");
-	const goToBlackboardsPage = () => navigation.navigate("Blackboards");
+	const { checkFieldsAndSignIn } = useAuth();
 
 	const onSignIn = async () => {
-		const isSuccessful = await signInAndCheckFields(email, password);
+		const isSuccessful = await checkFieldsAndSignIn(email, password);
 
 		if (isSuccessful) {
-			goToBlackboardsPage();
+			navigation.navigate("Blackboards");
 		}
 
 		setEmail("");
@@ -36,11 +33,11 @@ export const SignIn = () => {
 
 	useEffect(() => {
 		supabase.auth.onAuthStateChange((event) => {
-			const isSignedIn = event === "SIGNED_IN" || event === "INITIAL_SESSION"
+			const isSignedIn = event === "SIGNED_IN" || event === "INITIAL_SESSION";
 			if (isSignedIn) {
 				return setIsSignedIn(true);
 			}
-			setIsSignedIn(false)
+			setIsSignedIn(false);
 		});
 	}, []);
 
@@ -49,7 +46,7 @@ export const SignIn = () => {
 			{isSignedIn && (
 				<SafeAreaView className="w-full flex justify-end items-center absolute px-5 flex-row mt-2">
 					<TouchableOpacity
-						onPress={goToBlackboardsPage}
+						onPress={() => navigation.navigate("Blackboards")}
 						className="flex flex-row items-center justify-center"
 					>
 						<Text className="text-textColor font-semibold mr-1 text-base">
@@ -75,7 +72,10 @@ export const SignIn = () => {
 						<Text className="text-gray-300">
 							Don't have an account?
 							<View className="w-[3px]" />
-							<Text onPress={goToSignUpPage} className="font-semibold">
+							<Text
+								onPress={() => navigation.navigate("SignUp")}
+								className="font-semibold"
+							>
 								Sign Up!
 							</Text>
 						</Text>

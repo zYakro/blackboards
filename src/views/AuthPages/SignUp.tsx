@@ -15,12 +15,10 @@ export const SignUp = () => {
 
 	const navigation = useNavigation<NativeStackNavigationProp<Routes>>();
 
-	const { signUpAndCheckFields } = useAuth();
-
-	const goToSignInPage = () => navigation.navigate("SignIn");
+	const { checkFieldsAndSignUp } = useAuth();
 
 	const onSignUp = async () => {
-		const isSuccessful = await signUpAndCheckFields(
+		const isSuccessful = await checkFieldsAndSignUp(
 			email,
 			password,
 			confirmation,
@@ -58,7 +56,7 @@ export const SignUp = () => {
 						<Text className="text-gray-300">
 							You already have an account?
 							<View className="w-[3px]" />
-							<Text onPress={goToSignInPage} className="font-semibold">
+							<Text onPress={() => navigation.navigate('SignIn')} className="font-semibold">
 								Sign in!
 							</Text>
 						</Text>

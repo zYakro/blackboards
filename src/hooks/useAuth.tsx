@@ -12,7 +12,7 @@ export const useAuth = () => {
 
 	const { displayAlertOnError } = useErrors();
 
-	const signInAndCheckFields = async (
+	const checkFieldsAndSignIn = async (
 		email: string,
 		password: string,
 	): Promise<boolean> => {
@@ -49,7 +49,7 @@ export const useAuth = () => {
 		}
 	};
 
-	const signUpAndCheckFields = async (
+	const checkFieldsAndSignUp = async (
 		email: string,
 		password: string,
 		confirmation: string,
@@ -105,8 +105,8 @@ export const useAuth = () => {
 
 	return {
 		isWaiting,
-		signInAndCheckFields,
-		signUpAndCheckFields,
+		checkFieldsAndSignIn,
+		checkFieldsAndSignUp,
 		signOut,
 	};
 };
